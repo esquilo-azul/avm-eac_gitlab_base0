@@ -10,6 +10,10 @@ module Avm
     class RestApi < ::EacRest::Api
       class Node < ::Avm::Gitlab::RestApi::BaseEntity
         compare_by :id
+
+        def remove_member(user_id)
+          delete("#{api_prefix}/members/#{encode_id(user_id)}")
+        end
       end
     end
   end
