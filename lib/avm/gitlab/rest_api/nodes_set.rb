@@ -29,6 +29,7 @@ module Avm
         end
 
         attr_reader :rest_api
+        attr_writer :no_groups
 
         def initialize(rest_api, *ids)
           self.rest_api = rest_api
@@ -53,7 +54,13 @@ module Avm
 
         # @return [Array<Avm::Gitlab::RestApi::Node>]
         def nodes
-          nodes_set.sort_by { |p| [p.full_path] }
+          r = nodes_set
+          r = r.reject { |g| g.is_a?(::Avm::Gitlab::RestApi::Group) } if no_groups?
+          r.sort_by { |p| [p.full_path] }
+        end
+
+        def no_groups?
+          @no_groups ? true : false
         end
 
         private
