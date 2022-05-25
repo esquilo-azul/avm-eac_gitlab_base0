@@ -20,6 +20,10 @@ module Avm
           end
         end
 
+        def api_prefix
+          "/groups/#{encode_id(id)}"
+        end
+
         def to_s
           full_path
         end
@@ -28,14 +32,14 @@ module Avm
 
         def members_uncached
           fetch_entities(
-            "/groups/#{id}/members",
+            "#{api_prefix}/members",
             ::Avm::Gitlab::RestApi::Member
           )
         end
 
         def projects_uncached
           fetch_entities(
-            "/groups/#{id}/projects?order_by=path&sort=asc&per_page=9999",
+            "#{api_prefix}/projects?order_by=path&sort=asc&per_page=9999",
             ::Avm::Gitlab::RestApi::Project
           )
         end
