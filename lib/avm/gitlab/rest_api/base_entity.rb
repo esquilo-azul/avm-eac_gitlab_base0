@@ -10,6 +10,10 @@ module Avm
       class BaseEntity < ::EacRest::Entity
         enable_simple_cache
 
+        def delete(url_suffix)
+          api.request(url_suffix).verb(:delete).response.body_data
+        end
+
         def encode_id(id)
           return id if id.is_a?(::Integer)
 
