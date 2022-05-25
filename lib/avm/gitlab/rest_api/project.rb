@@ -31,13 +31,17 @@ module Avm
           end
         end
 
+        def api_prefix
+          "/projects/#{encode_id(id)}"
+        end
+
         def full_path
           path_with_namespace
         end
 
         def file(path)
           fetch_entity(
-            "/projects/#{encode_id(id)}/repository/files/#{encode_id(path)}?ref=#{default_branch}",
+            "#{api_prefix}/repository/files/#{encode_id(path)}?ref=#{default_branch}",
             ::Avm::Gitlab::RestApi::File,
             '404 File Not Found'
           )
@@ -51,7 +55,7 @@ module Avm
 
         def members_uncached
           fetch_entities(
-            "/projects/#{id}/members",
+            "#{api_prefix}/members",
             ::Avm::Gitlab::RestApi::Member
           )
         end
