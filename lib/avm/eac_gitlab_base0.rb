@@ -3,7 +3,7 @@
 require 'eac_ruby_utils/core_ext'
 
 module Avm
-  module Gitlab
+  module EacGitlabBase0
     require_sub __FILE__
   end
 end
