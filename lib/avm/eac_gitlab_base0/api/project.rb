@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-require 'avm/gitlab/rest_api/file'
-require 'avm/gitlab/rest_api/member'
-require 'avm/gitlab/rest_api/node'
+require 'avm/eac_gitlab_base0/api/file'
+require 'avm/eac_gitlab_base0/api/member'
+require 'avm/eac_gitlab_base0/api/node'
 require 'eac_rest/api'
 require 'eac_ruby_utils/core_ext'
 
 module Avm
-  module Gitlab
-    class RestApi < ::EacRest::Api
-      class Project < ::Avm::Gitlab::RestApi::Node
+  module EacGitlabBase0
+    class Api < ::EacRest::Api
+      class Project < ::Avm::EacGitlabBase0::Api::Node
         FIELDS = %w[id description name name_with_namespace path path_with_namespace created_at
                     default_branch tag_list ssh_url_to_repo http_url_to_repo web_url readme_url
                     avatar_url star_count forks_count last_activity_at empty_repo archived
@@ -42,7 +42,7 @@ module Avm
         def file(path)
           fetch_entity(
             "#{api_prefix}/repository/files/#{encode_id(path)}?ref=#{default_branch}",
-            ::Avm::Gitlab::RestApi::File,
+            ::Avm::EacGitlabBase0::Api::File,
             '404 File Not Found'
           )
         end
@@ -56,7 +56,7 @@ module Avm
         def members_uncached
           fetch_entities(
             "#{api_prefix}/members",
-            ::Avm::Gitlab::RestApi::Member
+            ::Avm::EacGitlabBase0::Api::Member
           )
         end
       end

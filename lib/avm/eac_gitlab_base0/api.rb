@@ -4,8 +4,8 @@ require 'eac_rest/api'
 require 'eac_ruby_utils/core_ext'
 
 module Avm
-  module Gitlab
-    class RestApi < ::EacRest::Api
+  module EacGitlabBase0
+    class Api < ::EacRest::Api
       require_sub __FILE__
 
       API_SUFFIX = '/api/v4'
@@ -26,9 +26,9 @@ module Avm
         }
       end
 
-      # @return [Avm::Gitlab::RestApi::ProjectsSet]
+      # @return [Avm::EacGitlabBase0::Api::ProjectsSet]
       def nodes_set(*projects_ids)
-        ::Avm::Gitlab::RestApi::NodesSet.new(self, *projects_ids)
+        ::Avm::EacGitlabBase0::Api::NodesSet.new(self, *projects_ids)
       end
 
       def request(service_url_suffix, headers = {}, &body_data_proc)
@@ -36,7 +36,7 @@ module Avm
       end
 
       def root
-        @root ||= ::Avm::Gitlab::RestApi::Root.new(self, {})
+        @root ||= ::Avm::EacGitlabBase0::Api::Root.new(self, {})
       end
     end
   end

@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require 'avm/gitlab/rest_api/base_entity'
+require 'avm/eac_gitlab_base0/api/base_entity'
 require 'eac_rest/api'
 require 'eac_ruby_utils/core_ext'
 
 module Avm
-  module Gitlab
-    class RestApi < ::EacRest::Api
-      class Member < ::Avm::Gitlab::RestApi::BaseEntity
+  module EacGitlabBase0
+    class Api < ::EacRest::Api
+      class Member < ::Avm::EacGitlabBase0::Api::BaseEntity
         FIELDS = %w[id name username state avatar_url web_url access_level expires_at].freeze
 
         FIELDS.each do |field|

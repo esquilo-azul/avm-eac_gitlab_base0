@@ -5,8 +5,8 @@ require 'eac_rest/entity'
 require 'eac_ruby_utils/core_ext'
 
 module Avm
-  module Gitlab
-    class RestApi < ::EacRest::Api
+  module EacGitlabBase0
+    class Api < ::EacRest::Api
       class BaseEntity < ::EacRest::Entity
         enable_simple_cache
 
@@ -56,7 +56,7 @@ module Avm
         def validate_response_data(response, not_found_message = nil)
           if response.body_data.is_a?(::Hash)
             response.body_data['error'].if_present do |v|
-              raise ::RuntimeError, "URL: #{response.url}, Data: #{v}"
+              raise "URL: #{response.url}, Data: #{v}"
             end
 
             response.body_data['message'].if_present do |v|
