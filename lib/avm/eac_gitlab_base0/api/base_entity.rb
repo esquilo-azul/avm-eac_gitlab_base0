@@ -48,7 +48,7 @@ module Avm
         end
 
         def dump_debug(basename, data)
-          file = ::Pathname.new('/tmp').join('gitlab_temp', basename + '.yaml')
+          file = ::Pathname.new('/tmp').join('gitlab_temp', "#{basename}.yaml")
           file.parent.mkpath
           ::EacRubyUtils::Yaml.dump_file(file, data)
         end
